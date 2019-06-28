@@ -19,7 +19,7 @@ connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
 
-  createBid();
+  grabHighestBid();
   
 });
 
@@ -35,6 +35,7 @@ connection.connect(function(err) {
 //exit - connection dot end
 
 var bid = 5 ; //user bid input
+var item = 'hairbrush'; //user input for item selection
 
 function listCategories(){
   console.log("Listing categories\n");
@@ -42,7 +43,7 @@ function listCategories(){
     "SELECT category FROM auctions",
     function(err, res){
       if(err) throw err;
-     
+     console.log(res);
     }
   );
 }
@@ -50,10 +51,10 @@ function listCategories(){
 function listItems(){
   console.log("Listing items\n");
   var query = connection.query(
-    "SELECT items FROM auctions",
+    "SELECT item FROM auctions",
     function(err, res){
       if(err) throw err;
-     
+      console.log(res);     
     }
   );
 }
@@ -61,10 +62,10 @@ function listItems(){
 function grabStartingBid(){
   console.log("Grabbing starting bid\n");
   var query = connection.query(
-    "SELECT starting_bid FROM auctions",
+    "SELECT starting_bid FROM auctions WHERE item = '" + item + "'",
     function(err, res){
       if(err) throw err;
-     
+      console.log(res);     
     }
   );
 }
@@ -72,10 +73,10 @@ function grabStartingBid(){
 function grabHighestBid(){
   console.log("Grabbing highest bid\n");
   var query = connection.query(
-    "SELECT highest_bid FROM auctions",
+    "SELECT highest_bid FROM auctions WHERE item = '" + item + "'",
     function(err, res){
       if(err) throw err;
-     
+      console.log(res);     
     }
   );
 }
@@ -89,54 +90,4 @@ function createBid() {
       console.log(res.affectedRows + " bid inserted!\n");
     }
   );
-}
-
-function updateProduct() {
-  console.log("Updating all bids...\n");
-  var query = connection.query(
-    "UPDATE products SET ? WHERE ?",
-    [
-      {
-        quantity: 100
-      },
-      {
-        flavor: "Rocky Road"
-      }
-    ],
-    function(err, res) {
-      if (err) throw err;
-      console.log(res.affectedRows + " products updated!\n");
-      // Call deleteProduct AFTER the UPDATE completes
-      deleteProduct();
-    }
-  );
-
-  // logs the actual query being run
-  console.log(query.sql);
-}
-
-function deleteProduct() {
-  console.log("Deleting all strawberry icecream...\n");
-  connection.query(
-    "DELETE FROM products WHERE ?",
-    {
-      flavor: "strawberry"
-    },
-    function(err, res) {
-      if (err) throw err;
-      console.log(res.affectedRows + " products deleted!\n");
-      // Call readProducts AFTER the DELETE completes
-      readProducts();
-    }
-  );
-}
-
-function readProducts() {
-  console.log("Selecting all products...\n");
-  connection.query("SELECT * FROM products", function(err, res) {
-    if (err) throw err;
-    // Log all results of the SELECT statement
-    console.log(res);
-    connection.end();
-  });
 }
