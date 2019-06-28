@@ -12,13 +12,13 @@ var connection = mysql.createConnection({
 
   // Your password
   password: process.env.DB_PASSWORD,
-  database: "greatbay_DB"
+  database: "great_bayDB"
 });
 
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  afterConnection();
+  connection.end();
 });
 
 // function afterConnection(){
