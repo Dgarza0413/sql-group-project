@@ -30,15 +30,32 @@ inquirer.prompt([
   }
 })
 
-
-
-
-
+function addItem() {
+    console.log("Creating a new auction.\n");
+    var startingBid;
+    var category;
+    var item;
+    var query = connection.query(
+        "INSERT INTO auctions SET ?",
+        {
+            starting_bid: startingBid,
+            category: category,
+            item: item
+        },
+        function(err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + "auction created!\n");
+            // auction added, go back to start
+            start();
+        }
+    )
+}
 
 
 connection.connect(function (err) {
-  if (err) throw err;
-  console.log("connected as id " + connection.threadId);
-  connection.end();
+    if (err) throw err;
+    console.log("connected as id " + connection.threadId);
+    addItem();
+  //   connection.end();
   // afterConnection();
 });
