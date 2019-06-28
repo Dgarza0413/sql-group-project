@@ -4,9 +4,9 @@ USE great_bayDB;
 CREATE TABLE auctions(
 id INT AUTO_INCREMENT NOT NULL,
 bidder TEXT NULL,
-starting_bid INT NOT NULL,
+starting_bid INT NULL,
 highest_bid DECIMAL (10,2),
-category TEXT NOT NULL,
-item TEXT NOT NULL,
+category TEXT NULL,
+item TEXT NULL,
 PRIMARY KEY (id));
 
