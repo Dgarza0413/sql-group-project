@@ -62,12 +62,3 @@ connection.connect(function (err) {
   connection.end();
   // afterConnection();
 });
-
-// function afterConnection(){
-//   connection.query("SELECT title FROM songs WHERE genre = 'Pop Rock'", function(err, res){
-//     if (err) throw err;
-//     console.log(res);
-//     connection.end();
-
-//   });
-// }
