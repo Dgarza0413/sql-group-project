@@ -16,20 +16,40 @@ var connection = mysql.createConnection({
   database: "great_bayDB"
 });
 
-inquirer.prompt([
-  {
-    type: "list",
-    message: "Welcome to GreatBay!! Select an Option",
-    choices: ["Place Bid (Buy)", "Sell Item"],
-    name: "listOptions"
-  }
+function startGreatBay() {
+  inquirer.prompt([
+    {
+      type: "list",
+      message: "Welcome to GreatBay!! Select an Option",
+      choices: ["Place Bid (Buy)", "Sell Item"],
+      name: "listOptions"
+    },
+    {
+      type: "list",
+      message: "you have selected SELL ITEM, what would you like to do",
+      choices: ["sell item", "go back"],
+      name: "sellOptions"
+    },
+    {
+      type: "list",
+      message: "",
+      choices: [],
+      name: ""
+    }
 
-]).then(function (inquirerResponse) {
-  if (inquirerResponse.list = "Place Bid (Buy)") {
-    console.log("the place bid option was chosen")
-  }
-})
 
+  ]).then(function (inquirerResponse) {
+    if (inquirerResponse.listOptions = "Place Bid (Buy)") {
+      console.log("the place bid option was chosen")
+    }
+    if (inquirerResponse.listOptions = "Sell Item") {
+      console.log("Sell item is selected")
+      inquirerResponse.sellOptions
+    }
+  })
+}
+
+startGreatBay()
 
 
 
