@@ -21,20 +21,20 @@ function startGreatBay() {
     {
       type: "list",
       message: "Welcome to GreatBay!! Select an Option",
-      choices: ["Buy Item", "Sell Item", "Add Item"],
+      choices: ["Buy_Item", "Sell_Item", "Add_Item"],
       name: "listOptions"
     },
-    {
-      type: "list",
-      message: "you have selected SELL ITEM, what would you like to do",
-      choices: ["sell options"],
-      name: "sellOptions"
-    },
+    // {
+    //   type: "list",
+    //   message: "you selected SELL ITEM, what would you like to do",
+    //   choices: ["sell options"],
+    //   name: "sellItem"
+    // },
     {
       type: "list",
       message: "",
       choices: [],
-      name: ""
+      name: "name"
     },
     {
       type: "input",
@@ -52,21 +52,19 @@ function startGreatBay() {
       choices: ["category list"],
       name: "category"
     }
-
-
-
   ]).then(function (inquirerResponse) {
     if (inquirerResponse.listOptions === "Buy Item") {
       console.log("Select Item for Bid")
-      inquirerResponse.populateItems
     }
     else if (inquirerResponse.listOptions === "Sell Item") {
       console.log("Sell item is selected")
-      inquirerResponse.sellOptions
     }
     else if (inquirerResponse.listOptions === "Add Item") {
-      inquirerResponse.addItem
-    };
+      console.log("add item")
+    } else {
+      console.log("please select item")
+      inquirerResponse.listOptions
+    }
   })
 }
 
